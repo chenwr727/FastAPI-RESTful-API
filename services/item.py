@@ -2,7 +2,7 @@ from sqlmodel import Session, select
 
 from core.exceptions import NotFoundError
 from core.logging import logger
-from models import Item, ItemCreate, ItemUpdate
+from models import Item, ItemCreate, ItemUpdate, User
 
 
 class ItemService:
@@ -19,6 +19,11 @@ class ItemService:
         Returns:
             Item: The created item.
         """
+        owner = self.session.get(User, owner_id)
+        if not owner:
+            logger.warning(f"User not found with ID: {owner_id}")
+            raise NotFoundError("User", owner_id)
+
         db_item = Item(owner_id=owner_id, **item.model_dump(exclude_unset=True))
         self.session.add(db_item)
         self.session.commit()
@@ -36,7 +41,9 @@ class ItemService:
         Returns:
             list[Item]: A list of items.
         """
-        items = self.session.exec(select(Item).offset(offset).limit(limit)).all()
+        items = self.session.exec(
+            select(Item).order_by(Item.id).offset(offset).limit(limit)
+        ).all()
         logger.info(f"Items retrieved: {items}")
         return items
 

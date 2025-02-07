@@ -35,7 +35,9 @@ class UserService:
         Returns:
             list[User]: The list of users retrieved
         """
-        users = self.session.exec(select(User).offset(offset).limit(limit)).all()
+        users = self.session.exec(
+            select(User).order_by(User.id).offset(offset).limit(limit)
+        ).all()
         logger.info(f"Users retrieved: {users}")
         return users
 
