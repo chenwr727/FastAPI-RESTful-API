@@ -41,9 +41,7 @@ class ItemService:
         Returns:
             list[Item]: A list of items.
         """
-        items = self.session.exec(
-            select(Item).order_by(Item.id).offset(offset).limit(limit)
-        ).all()
+        items = self.session.exec(select(Item).order_by(Item.id).offset(offset).limit(limit)).all()
         logger.info(f"Items retrieved: {items}")
         return items
 

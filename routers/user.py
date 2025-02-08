@@ -11,9 +11,7 @@ router = APIRouter()
 
 
 @router.post("/", response_model=UserPublic)
-def create_user(
-    user: UserCreate, user_service: Annotated[UserService, Depends(get_user_service)]
-):
+def create_user(user: UserCreate, user_service: Annotated[UserService, Depends(get_user_service)]):
     return user_service.create_user(user)
 
 
@@ -27,9 +25,7 @@ def read_users(
 
 
 @router.get("/{user_id}", response_model=UserPublic)
-def read_user(
-    user_id: int, user_service: Annotated[UserService, Depends(get_user_service)]
-):
+def read_user(user_id: int, user_service: Annotated[UserService, Depends(get_user_service)]):
     user = user_service.read_user(user_id)
     if not user:
         raise NotFoundError("User", user_id)
@@ -46,7 +42,5 @@ def update_user(
 
 
 @router.delete("/{user_id}")
-def delete_user(
-    user_id: int, user_service: Annotated[UserService, Depends(get_user_service)]
-):
+def delete_user(user_id: int, user_service: Annotated[UserService, Depends(get_user_service)]):
     return user_service.delete_user(user_id)

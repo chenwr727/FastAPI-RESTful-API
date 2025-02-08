@@ -29,9 +29,7 @@ def read_items(
 
 
 @router.get("/{item_id}", response_model=ItemPublic)
-def read_item(
-    item_id: int, item_service: Annotated[ItemService, Depends(get_item_service)]
-):
+def read_item(item_id: int, item_service: Annotated[ItemService, Depends(get_item_service)]):
     item = item_service.read_item(item_id)
     if not item:
         raise NotFoundError("Item", item_id)
@@ -48,7 +46,5 @@ def update_item(
 
 
 @router.delete("/{item_id}")
-def delete_item(
-    item_id: int, item_service: Annotated[ItemService, Depends(get_item_service)]
-):
+def delete_item(item_id: int, item_service: Annotated[ItemService, Depends(get_item_service)]):
     return item_service.delete_item(item_id)

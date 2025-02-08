@@ -1,4 +1,9 @@
+from typing import TYPE_CHECKING
+
 from sqlmodel import Field, Relationship, SQLModel
+
+if TYPE_CHECKING:
+    from .user import User
 
 
 class ItemBase(SQLModel):
@@ -9,7 +14,7 @@ class ItemBase(SQLModel):
 class Item(ItemBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
     owner_id: int = Field(foreign_key="user.id", ondelete="CASCADE")
-    owner: "User" = Relationship(back_populates="items") # type: ignore
+    owner: "User" = Relationship(back_populates="items")
 
 
 class ItemPublic(ItemBase):
