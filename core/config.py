@@ -6,12 +6,16 @@ class Settings(BaseSettings):
     VERSION: str = "1.0.0"
     PORT: int = 8000
 
-    DATABASE_URL: str = "sqlite:///database.db"
+    DATABASE_URL: str = "sqlite+aiosqlite:///./database.db"
     CHECK_SAME_THREAD: bool = False
+
+    CORS_ORIGINS: list[str] = ["*"]
+    DEBUG: bool = False
+
     LOG_LEVEL: str = "INFO"
 
     class Config:
-        env_file = "../config/.env"
+        env_file = "./config/.env"
         env_file_encoding = "utf-8"
 
 
