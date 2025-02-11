@@ -1,0 +1,10 @@
+aiosqlite==0.20.0
+fastapi==0.115.8
+loguru==0.7.3
+pydantic==2.10.6
+pydantic_settings==2.7.1
+pytest==8.3.4
+SQLAlchemy==2.0.36
+sqlmodel==0.0.22
+starlette==0.45.3
+uvicorn==0.34.0

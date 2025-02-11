@@ -11,7 +11,8 @@ FastAPI-RESTful-API/
 │   ├── config.py       # 应用配置项
 │   ├── database.py     # 数据库相关操作
 │   ├── exceptions.py   # 错误处理逻辑
-│   └── logging.py      # 日志记录配置
+│   ├── logging.py      # 日志记录配置
+│   └── response.py     # 响应处理逻辑
 ├── models/
 │   ├── __init__.py     # 初始化文件
 │   ├── user.py         # 用户模型
@@ -50,7 +51,7 @@ uvicorn main:app --reload --host 0.0.0.0 --port <你的端口号>
 启动服务后，可以通过浏览器访问 [http://localhost:<你的端口号>/docs](http://localhost:<你的端口号>/docs) 查看自动生成的交互式API文档。
 
 #### 数据库初始化
-- 应用启动时会自动调用 `create_db_and_tables()` 函数来创建所需的数据库表结构。
+- 应用启动时会自动调用 `init_db()` 函数来创建所需的数据库表结构。
 - 如果需要手动初始化数据库，可以在 `core/database.py` 中实现具体的数据库初始化逻辑。
 
 #### 中间件
